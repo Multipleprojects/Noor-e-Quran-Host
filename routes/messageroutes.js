@@ -1,5 +1,5 @@
 const express = require('express');
-const messageController = require('../controller/messageController'); // Use consistent naming convention
+const messageController = require('../controller/messagecontroller'); // Use consistent naming convention
 const router = express.Router();
 
 // Route for creating a new message
