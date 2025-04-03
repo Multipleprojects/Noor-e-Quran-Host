@@ -8,6 +8,8 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+// Serve static files from the "build" directory
+app.use(express.static(path.join(__dirname, "build")));
 
 // Serve static files from the uploads directory
 app.use('/uploads', express.static('uploads'));
@@ -19,10 +21,11 @@ app.use('/uploadvideo', require('./routes/fileuploadroutes'));
 app.use('/article', require('./routes/articleroutes'));
 app.use('/message', require('./routes/messageroutes'));
 
-app.get("/", (req, res) => {
-  app.use(express.static(path.resolve(__dirname, "build")));
+// Serve the React app on all routes except API routes
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "build", "index.html"));
 });
+
 const url ="mongodb+srv://alyanbhatti688:kW2zxzsVcNfNpe7F@cluster0.2zvzr.mongodb.net/Quranverse?retryWrites=true&w=majority&appName=Cluster0";
 
 //url="mongodb://127.0.0.1:27017/Quranverse";
